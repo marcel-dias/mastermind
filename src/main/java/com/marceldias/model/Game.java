@@ -10,12 +10,15 @@ import java.util.List;
 public class Game {
 
     @Id
-    private String id;
+    private String key;
+    private Color[] colors = Color.values();
+    private final Integer codeLength = 8;
+    private final Long gameTime = 5l;
     private Guess code;
     private User user;
     private LocalDateTime createdAt;
     private boolean solved = false;
-    private List<Guess> guesses = new ArrayList<>();
+    private List<GuessResult> guesses = new ArrayList<>();
 
     public Game(User user) {
         this.user = user;
@@ -24,17 +27,17 @@ public class Game {
     }
 
     protected Guess generateCode() {
-        String code = RandomStringUtils.random(8, Color.COLORS);
+        String code = RandomStringUtils.random(codeLength, Color.COLORS);
         return new Guess(code);
     }
 
     public boolean isExpired() {
-        LocalDateTime fiveMinutes = createdAt.plusMinutes(5l);
+        LocalDateTime fiveMinutes = createdAt.plusMinutes(gameTime);
         return LocalDateTime.now().isAfter(fiveMinutes);
     }
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
     public Guess getCode() {
@@ -53,8 +56,12 @@ public class Game {
         this.createdAt = createdAt;
     }
 
-    public List<Guess> getGuesses() {
+    public List<GuessResult> getGuesses() {
         return guesses;
+    }
+
+    public Integer getGuesesCount() {
+        return guesses.size();
     }
 
     public boolean isSolved() {

@@ -23,7 +23,7 @@ public class GuessTest {
         Guess guess = new Guess(code);
 
         Assert.assertNotNull(guess.getCreatedAt());
-        Assert.assertNotNull(guess.getColors());
+        Assert.assertNotNull(guess.getCode());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -49,7 +49,7 @@ public class GuessTest {
         Guess guess = new Guess(code);
         List<Color> colors = guess.populateColors(code);
 
-        Assert.assertNotNull(guess.getColors());
-        Assert.assertThat(guess.getColors(), IsEqual.equalTo(colors));
+        Assert.assertNotNull(guess.getCode());
+        Assert.assertThat(guess.getCode(), IsEqual.equalTo(colors));
     }
 }
