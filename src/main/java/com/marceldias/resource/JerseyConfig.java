@@ -8,5 +8,6 @@ public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
 		packages("com.marceldias.resource");
+        packages("com.marceldias.exception");
     }
 }
