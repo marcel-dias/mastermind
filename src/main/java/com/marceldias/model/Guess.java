@@ -42,8 +42,8 @@ public class Guess {
 		return code;
 	}
 
-    public void setCode(String code) {
-        this.code = populateColors(code);
+    public void setCode(List<Color> code) {
+        this.code = code;
     }
 
 	public LocalDateTime getCreatedAt() {
@@ -60,5 +60,15 @@ public class Guess {
 
     public void setGameKey(String gameKey) {
         this.gameKey = gameKey;
+    }
+
+    @Override
+    public String toString() {
+        return "Guess{" +
+                "id='" + id + '\'' +
+                ", code=" + code +
+                ", createdAt=" + createdAt +
+                ", gameKey='" + gameKey + '\'' +
+                '}';
     }
 }
