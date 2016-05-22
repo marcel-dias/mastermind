@@ -64,7 +64,7 @@ public class Game {
         return guesses;
     }
 
-    public Integer getGuesesCount() {
+    public Integer getGuessesCount() {
         return guesses.size();
     }
 
