@@ -1,16 +1,18 @@
 package com.marceldias.model;
 
+import java.util.List;
+
 public class GuessResult {
 
-    private Guess guess;
+    private List<Color> guess;
     private Integer exact;
     private Integer near;
 
-    public Guess getGuess() {
+    public List<Color> getGuess() {
         return guess;
     }
 
-    public void setGuess(Guess guess) {
+    public void setGuess(List<Color> guess) {
         this.guess = guess;
     }
 

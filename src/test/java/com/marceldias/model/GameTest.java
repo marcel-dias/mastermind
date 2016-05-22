@@ -25,6 +25,14 @@ public class GameTest {
     }
 
     @Test
+    public void testCreateNewGameWithoutUser() {
+        Game game = new Game();
+        Assert.assertNotNull(game.getCreatedAt());
+        Assert.assertNotNull(game.getCode());
+        Assert.assertNull(game.getUser());
+    }
+
+    @Test
     public void testExpiredGame() {
         Game game = new Game(user);
         game.setCreatedAt(LocalDateTime.now().minusMinutes(15l));
@@ -35,12 +43,5 @@ public class GameTest {
     public void testNonExpiredGame() {
         Game game = new Game(user);
         Assert.assertThat(game.isExpired(), Is.is(Boolean.FALSE));
-    }
-
-    @Test
-    public void testGuessMatches() {
-        Game game = new Game(user);
-        game.setCreatedAt(LocalDateTime.now().minusMinutes(15l));
-        Assert.assertThat(game.isExpired(), Is.is(Boolean.TRUE));
     }
 }

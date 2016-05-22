@@ -1,7 +1,8 @@
 package com.marceldias.model;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,21 +15,24 @@ public class Game {
     private Color[] colors = Color.values();
     private final Integer codeLength = 8;
     private final Long gameTime = 5l;
-    private Guess code;
+    @JsonIgnore
+    private List<Color> code = new ArrayList<>();
     private User user;
+    @JsonIgnore
     private LocalDateTime createdAt;
     private boolean solved = false;
     private List<GuessResult> guesses = new ArrayList<>();
+    @Transient
+    private GuessResult result;
 
-    public Game(User user) {
-        this.user = user;
+    public Game() {
         createdAt = LocalDateTime.now();
-        code = generateCode();
+        code = Color.generateColorCode(codeLength);
     }
 
-    protected Guess generateCode() {
-        String code = RandomStringUtils.random(codeLength, Color.COLORS);
-        return new Guess(code);
+    public Game(User user) {
+        this();
+        this.user = user;
     }
 
     public boolean isExpired() {
@@ -40,7 +44,7 @@ public class Game {
         return key;
     }
 
-    public Guess getCode() {
+    public List<Color> getCode() {
         return code;
     }
 
@@ -70,5 +74,22 @@ public class Game {
 
     public void setSolved(boolean solved) {
         this.solved = solved;
+    }
+
+    public Integer getCodeLength() {
+        return codeLength;
+    }
+
+    public GuessResult getResult() {
+        return result;
+    }
+
+    public void setResult(GuessResult result) {
+        this.result = result;
+        this.guesses.add(result);
+    }
+
+    public Color[] getColors() {
+        return colors;
     }
 }
