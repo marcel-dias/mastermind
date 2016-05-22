@@ -1,6 +1,7 @@
 package com.marceldias.model;
 
 import org.hamcrest.core.Is;
+import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,10 +11,12 @@ import java.time.LocalDateTime;
 public class GameTest {
 
     User user;
+    String username;
 
     @Before
     public void setUp() {
-        user = new User("Test"+System.currentTimeMillis());
+        username = "Test-"+System.currentTimeMillis();
+        user = new User(username);
     }
 
     @Test
@@ -22,6 +25,7 @@ public class GameTest {
         Assert.assertNotNull(game.getCreatedAt());
         Assert.assertNotNull(game.getCode());
         Assert.assertNotNull(game.getUser());
+        Assert.assertThat(game.getUser().getName(), IsEqual.equalTo(username));
     }
 
     @Test
