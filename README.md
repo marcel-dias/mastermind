@@ -12,13 +12,21 @@ The typical Mastermind game is played with 4 colors and 4 positions; however, fo
 ## How to build and run
 
 To build the sources you need to you maven.  
-`mvn clean install`  
+```bash
+mvn clean install
+```
 If you like to use docker, you can build a Docker image as well  
-`docker build -t marceldiass/mastermind .`  
+```bash
+docker build -t marceldiass/mastermind .
+```  
 Before run the container you need to setup a MongoDB server. To use Docker for that just run:  
-`docker run -d --name mastermind-mongo mongo`  
+```bash
+docker run -d --name mastermind-mongo mongo
+```  
 And finally run it  
-`docker run -d --name mastermind --link mastermind-mongo -p 8080:8080 -e MONGODB_URI="mongodb://mastermind-mongo:27017/mastermind" marceldiass/mastermind`
+```bash
+docker run -d --name mastermind --link mastermind-mongo -p 8080:8080 -e MONGODB_URI="mongodb://mastermind-mongo:27017/mastermind" marceldiass/mastermind
+```
 
 
 ## How to consume
@@ -27,9 +35,41 @@ As it is just an API you can you curl or any other HTTP client to reach the endp
 Below we have request examples:
 
 * Create a new game  
-`curl -i -X POST -H "Content-Type: application/json" -d '{"name":"MarcelDias"}' "http://localhost:8080/new-game"`
+```bash
+curl -i -X POST -H "Content-Type: application/json" -d '{"name":"Marcel Dias"}' "http://localhost:8080/new-game"
+```
+New Game response body
+```json
+{
+ "key":"57421c60bee8d9ae4e7fcca6",
+ "colors":["R","B","G","Y","O","P","C","M"],
+ "codeLength":8,
+ "user":{"name":"Marcel Dias"},
+ "solved":false,
+ "guesses":[],
+ "result":null,
+ "expired":false,
+ "guesesCount":0
+}
+```
 * Try a guess  
-`curl -i -X POST -H "Content-Type: application/json" -d '{ "gameKey":"5741c740e4b00960f2e616bd", "code": ["Y","R","G","R","Y","B","C","Y"] }' "http://localhost:8080/guess"`
+```bash
+curl -i -X POST -H "Content-Type: application/json" -d '{ "gameKey":"5741c740e4b00960f2e616bd", "code": ["Y","R","G","R","Y","B","C","Y"] }' "http://localhost:8080/guess"
+```  
+Guess response body
+```json
+{
+ "key":"57421c60bee8d9ae4e7fcca6",
+ "colors":["R","B","G","Y","O","P","C","M"],
+ "codeLength":8,
+ "user":{"name":"Marcel Dias"},
+ "solved":false,
+ "guesses":[{"guess":["Y","R","G","R","Y","B","C","Y"],"exact":0,"near":2}],
+ "result":{"guess":["Y","R","G","R","Y","B","C","Y"],"exact":0,"near":2},
+ "expired":false,
+ "guessesCount":1
+}
+```
 
 ## Tech stack
 
