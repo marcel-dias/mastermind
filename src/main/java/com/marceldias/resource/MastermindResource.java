@@ -1,10 +1,10 @@
 package com.marceldias.resource;
 
-import com.marceldias.model.Color;
-import com.marceldias.model.Game;
-import com.marceldias.model.Guess;
-import com.marceldias.model.User;
-import com.marceldias.repository.GameRepository;
+import com.marceldias.model.*;
+import com.marceldias.service.GameService;
+import com.marceldias.service.GuessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +18,27 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MastermindResource {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MastermindResource.class);
+
     @Autowired
-    GameRepository gameRepository;
+    GameService gameService;
+
+    @Autowired
+    GuessService guessService;
+
+    @POST
+    @Path("/clean")
+    public ErrorMessage clean() {
+        gameService.clear();
+        ErrorMessage msg = new ErrorMessage("Cleared All Games!");
+        return msg;
+    }
 
     @POST
     @Path("/new-game")
     public Game newGame(User user) {
         Game game = new Game(user);
-        gameRepository.insert(game);
+        gameService.create(game);
         return game;
     }
 
@@ -33,21 +46,27 @@ public class MastermindResource {
     @Path("/guess")
     public Game guess(Guess guess) {
 
+        LOGGER.info(guess.toString());
+
         if (guess.getGameKey() == null || guess.getGameKey().isEmpty()) {
             throw new IllegalArgumentException("The gameKey is null or empty!");
         }
 
-        Game game = gameRepository.findByKey(guess.getGameKey());
+        Game game = gameService.findByKey(guess.getGameKey());
         if (game.isExpired()) {
-            throw new IllegalArgumentException("The game with gameKey " + guess.getGameKey() +" has expired! more than 5 minutes playing.");
+            throw new IllegalArgumentException("The game with gameKey " + guess.getGameKey() + " has expired! more than 5 minutes playing.");
+        } else if (game.isSolved()) {
+            return game;
         }
 
+        GuessResult result = guessService.processGuess(guess, game);
+        gameService.update(game, result);
         return game;
     }
 
     @GET
     @Path("/games")
     public List<Game> getGames() {
-        return gameRepository.findAll();
+        return gameService.findAll();
     }
 }
