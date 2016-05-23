@@ -1,5 +1,7 @@
 # Mastermind API
 
+[![CircleCI](https://circleci.com/gh/marceldiass/mastermind.svg?style=svg)](https://circleci.com/gh/marceldiass/mastermind)
+
 Let's play Mastermind! If you've never played Mastermind, take a few minutes to check out the rules here: [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)#Gameplay_and_rules).
 
 The typical Mastermind game is played with 4 colors and 4 positions; however, for this project we will be using 8 colors and 8 positions.
@@ -49,7 +51,7 @@ New Game response body
  "guesses":[],
  "result":null,
  "expired":false,
- "guesesCount":0
+ "guessesCount":0
 }
 ```
 * Try a guess  
