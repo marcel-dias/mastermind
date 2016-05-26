@@ -1,6 +1,8 @@
 # Mastermind API
 
 [![CircleCI](https://circleci.com/gh/marceldiass/mastermind.svg?style=svg)](https://circleci.com/gh/marceldiass/mastermind)
+[![codecov](https://codecov.io/gh/marceldiass/mastermind/branch/master/graph/badge.svg)](https://codecov.io/gh/marceldiass/mastermind)
+
 
 Let's play Mastermind! If you've never played Mastermind, take a few minutes to check out the rules here: [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)#Gameplay_and_rules).
 
