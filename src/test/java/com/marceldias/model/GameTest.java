@@ -2,6 +2,7 @@ package com.marceldias.model;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +48,18 @@ public class GameTest {
     public void testNonExpiredGame() {
         Game game = new Game(user);
         Assert.assertThat(game.isExpired(), Is.is(Boolean.FALSE));
+    }
+
+    @Test
+    public void testGuessCount() {
+        Game game = new Game(user);
+        Assert.assertThat(game.getGuessesCount(), Is.is(0));
+    }
+
+    @Test
+    public void testGuesses() {
+        Game game = new Game(user);
+        Assert.assertThat(game.getGuesses().size(), Is.is(0));
+        Assert.assertThat(game.getResult(), IsNull.nullValue());
     }
 }
