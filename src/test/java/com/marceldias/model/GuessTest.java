@@ -33,4 +33,22 @@ public class GuessTest {
         Assert.assertThat(guess.getGameKey(), IsEqual.equalTo(gameKey));
 
     }
+
+    @Test
+    public void testToString() {
+        List<Color> code = Arrays.asList(Color.P, Color.C, Color.B, Color.R, Color.O, Color.M, Color.G, Color.Y);
+        Guess guess = new Guess();
+        guess.setCode(code);
+        String gameKey = "Teste-game-key";
+        guess.setGameKey(gameKey);
+
+        String expexted = "Guess{" +
+                " code=" + code + ", gameKey='" + gameKey + "\'}";
+
+        Assert.assertNotNull(guess.getCode());
+        Assert.assertThat(guess.getCode().size(), IsEqual.equalTo(8));
+        Assert.assertThat(guess.getCode(), IsEqual.equalTo(code));
+        Assert.assertThat(guess.getGameKey(), IsEqual.equalTo(gameKey));
+        Assert.assertThat(guess.toString(), IsEqual.equalTo(expexted));
+    }
 }
