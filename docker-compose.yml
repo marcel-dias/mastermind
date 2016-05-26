@@ -1,6 +1,5 @@
 mastermind:
-  image: "marceldiass/mastermind"
-  restart: always
+  build: .
   links:
     - db:mongodb
   ports:
