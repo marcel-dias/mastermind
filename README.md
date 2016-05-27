@@ -32,6 +32,10 @@ And finally run it
 docker run -d --name mastermind --link mastermind-mongo -p 8080:8080 -e MONGODB_URI="mongodb://mastermind-mongo:27017/mastermind" marceldiass/mastermind
 ```
 
+Or you can use docker-compose
+```
+docker-compose up
+```  
 
 ## How to consume
 
