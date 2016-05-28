@@ -28,9 +28,9 @@ public class MastermindResource {
 
     @POST
     @Path("/clean")
-    public ErrorMessage clean() {
+    public ResponseMessage clean() {
         gameService.clear();
-        ErrorMessage msg = new ErrorMessage("Cleared All Games!");
+        ResponseMessage msg = new ResponseMessage("Cleared All Games!");
         return msg;
     }
 
@@ -45,22 +45,8 @@ public class MastermindResource {
     @POST
     @Path("/guess")
     public Game guess(Guess guess) {
-
         LOGGER.info(guess.toString());
-
-        if (guess.getGameKey() == null || guess.getGameKey().isEmpty()) {
-            throw new IllegalArgumentException("The gameKey is null or empty!");
-        }
-
-        Game game = gameService.findByKey(guess.getGameKey());
-        if (game.isExpired()) {
-            throw new IllegalArgumentException("The game with gameKey " + guess.getGameKey() + " has expired! more than 5 minutes playing.");
-        } else if (game.isSolved()) {
-            return game;
-        }
-
-        GuessResult result = guessService.processGuess(guess, game);
-        gameService.update(game, result);
+        Game game = gameService.processGuess(guess);
         return game;
     }
 

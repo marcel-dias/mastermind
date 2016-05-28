@@ -1,6 +1,7 @@
 package com.marceldias.service;
 
 import com.marceldias.model.Game;
+import com.marceldias.model.Guess;
 import com.marceldias.model.GuessResult;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface GameService {
     /**
      * Find a single Game by key identifier.
      * @param key A Game key string
-     * @return An Game object to the given key or <code>null</code> if there is no Game with that key
+     * @return A Game object to the given key or <code>null</code> if there is no Game with that key
      */
     Game findByKey(String key);
 
@@ -43,5 +44,14 @@ public interface GameService {
      * Delete all Games
      */
     void clear();
+
+    /**
+     * Process the guess to create a feedback to the user.
+     * With number of exacts and nears and also the guess history
+     *
+     * @param guess A guess code to solve the game
+     * @return A updated game with the guess result
+     */
+    Game processGuess(Guess guess);
 
 }
