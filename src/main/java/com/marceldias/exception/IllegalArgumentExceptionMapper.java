@@ -1,6 +1,6 @@
 package com.marceldias.exception;
 
-import com.marceldias.model.ErrorMessage;
+import com.marceldias.model.ResponseMessage;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Response;
@@ -12,7 +12,7 @@ import javax.ws.rs.ext.Provider;
 public class IllegalArgumentExceptionMapper implements ExceptionMapper<IllegalArgumentException> {
     @Override
     public Response toResponse(IllegalArgumentException e) {
-        ErrorMessage msg = new ErrorMessage(e.getMessage());
+        ResponseMessage msg = new ResponseMessage(e.getMessage());
         return Response.status(Response.Status.BAD_REQUEST).entity(msg).build();
     }
 }

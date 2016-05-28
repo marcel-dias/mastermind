@@ -1,10 +1,10 @@
 package com.marceldias.model;
 
-public class ErrorMessage {
+public class ResponseMessage {
 
     private String message;
 
-    public ErrorMessage(String message) {
+    public ResponseMessage(String message) {
         this.message = message;
     }
 
