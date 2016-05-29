@@ -22,6 +22,9 @@ public enum Color implements Serializable {
 	C("Cyan"),
 	M("Magenta");
 
+    private String label;
+    public static final String COLORS;
+
     Color(String label) {
 		this.label = label;
 	}
@@ -29,9 +32,6 @@ public enum Color implements Serializable {
 	static {
 		COLORS = Arrays.stream(Color.values()).map(Enum::name).collect(Collectors.joining());
 	}
-
-	private String label;
-	public static final String COLORS;
 
     /**
      * Transform a a color sequence string into a Color List

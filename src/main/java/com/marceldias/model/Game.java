@@ -13,8 +13,8 @@ public class Game {
     @Id
     private String key;
     private Color[] colors = Color.values();
-    private final Integer codeLength = 8;
-    private final Long gameTime = 5l;
+    private static final Integer codeLength = 8;
+    private static final Long gameTime = 5L;
     @JsonIgnore
     private List<Color> code = new ArrayList<>();
     private User user;

@@ -34,8 +34,7 @@ public class MastermindResource {
     public ResponseMessage clear() {
         LOGGER.info("Cleared All Games!");
         gameService.clear();
-        ResponseMessage msg = new ResponseMessage("Cleared All Games!");
-        return msg;
+        return new ResponseMessage("Cleared All Games!");
     }
 
     @POST
@@ -50,8 +49,7 @@ public class MastermindResource {
     @Path("/guess")
     public Game guess(Guess guess) {
         LOGGER.info(guess.toString());
-        Game game = gameService.processGuess(guess);
-        return game;
+        return gameService.processGuess(guess);
     }
 
     @GET
