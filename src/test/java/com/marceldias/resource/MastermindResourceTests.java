@@ -9,7 +9,6 @@ import com.marceldias.MastermindApplication;
 import com.marceldias.json.factory.GameJsonFactory;
 import com.marceldias.model.*;
 import com.marceldias.repository.GameRepository;
-import com.marceldias.service.GameService;
 import com.marceldias.service.GuessService;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -38,9 +37,6 @@ public class MastermindResourceTests {
 
     @Autowired
     private GameRepository gameRepository;
-
-    @Autowired
-    private GameService gameService;
 
     @Autowired
     private GuessService guessService;

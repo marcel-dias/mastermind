@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 public class GameTest {
 
-    User user;
-    String username;
+    private User user;
+    private String username;
 
     @Before
     public void setUp() {
