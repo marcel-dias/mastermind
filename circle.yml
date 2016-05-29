@@ -4,7 +4,7 @@ machine:
 
 database:
   pre:
-    - sudo service mongodb stop
+    - sudo service mongod stop
 
 test:
   post:
