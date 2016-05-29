@@ -69,4 +69,9 @@ public class GuessServiceTest {
         Assert.assertThat(result.getExact(), IsEqual.equalTo(4));
         Assert.assertThat(result.getNear(), IsEqual.equalTo(0));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGuessWithoutCode() {
+        guessService.processGuess(guess, game);
+    }
 }
