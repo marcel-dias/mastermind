@@ -27,8 +27,9 @@ public class MastermindResource {
     GuessService guessService;
 
     @POST
-    @Path("/clean")
-    public ResponseMessage clean() {
+    @Path("/clear")
+    public ResponseMessage clear() {
+        LOGGER.info("Cleared All Games!");
         gameService.clear();
         ResponseMessage msg = new ResponseMessage("Cleared All Games!");
         return msg;
