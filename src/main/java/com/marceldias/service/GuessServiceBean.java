@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 public class GuessServiceBean implements GuessService {
 
     public GuessResult processGuess(Guess guess, Game game) {
+        if (guess.getCode() == null || guess.getCode().isEmpty()) {
+            throw new IllegalArgumentException("The code guessed is null or empty!");
+        }
         GuessResult result = new GuessResult();
         result.setGuess(guess.getCode());
 
