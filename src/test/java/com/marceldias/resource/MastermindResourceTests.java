@@ -1,6 +1,5 @@
 package com.marceldias.resource;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.internal.mapping.Jackson2Mapper;
@@ -14,14 +13,14 @@ import com.marceldias.service.GameService;
 import com.marceldias.service.GuessService;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
-import org.hamcrest.collection.IsArray;
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.hamcrest.collection.IsEmptyCollection;
-import org.hamcrest.core.*;
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNull;
 import org.hamcrest.text.IsEmptyString;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,7 +118,7 @@ public class MastermindResourceTests {
     }
 
     @Test
-    public void testGuess() throws JsonProcessingException {
+    public void testGuess() {
 
         Guess guess = new Guess();
         guess.setGameKey(game.getKey());
@@ -150,7 +149,7 @@ public class MastermindResourceTests {
     }
 
     @Test
-    public void testGuessWithoutCode() throws JsonProcessingException {
+    public void testGuessWithoutCode() {
 
         Guess guess = new Guess();
         guess.setGameKey(game.getKey());
@@ -169,7 +168,7 @@ public class MastermindResourceTests {
     }
 
     @Test
-    public void testGuessWithoutGamekey() throws JsonProcessingException {
+    public void testGuessWithoutGamekey() {
 
         Guess guess = new Guess();
         guess.setCode(Color.generateColorCode(8));

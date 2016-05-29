@@ -13,8 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
-
 @RunWith(MockitoJUnitRunner.class)
 public class GameServiceTest {
 
@@ -22,7 +20,6 @@ public class GameServiceTest {
     private GameRepository gameRepository;
     private Game game;
     private User user;
-    private List<Color> code;
     private Guess guess;
     private String key = "Key-"+System.currentTimeMillis();
 
@@ -32,7 +29,6 @@ public class GameServiceTest {
     @Before
     public void setUp() {
         user = new User("Test "+System.currentTimeMillis());
-        code = Color.generateColorCode(8);
         game = new Game(user);
     }
 

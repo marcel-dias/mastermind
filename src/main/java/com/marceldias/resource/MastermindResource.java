@@ -1,6 +1,9 @@
 package com.marceldias.resource;
 
-import com.marceldias.model.*;
+import com.marceldias.model.Game;
+import com.marceldias.model.Guess;
+import com.marceldias.model.ResponseMessage;
+import com.marceldias.model.User;
 import com.marceldias.service.GameService;
 import com.marceldias.service.GuessService;
 import org.slf4j.Logger;
