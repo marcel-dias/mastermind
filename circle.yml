@@ -2,6 +2,10 @@ machine:
   java:
     version: oraclejdk8
 
+database:
+  pre:
+    - sudo service mongodb stop
+
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
