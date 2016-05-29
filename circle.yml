@@ -2,9 +2,14 @@ machine:
   java:
     version: oraclejdk8
 
+dependencies:
+  pre:
+    - sudo service mongod stop
+
 test:
+  override:
+    - mvn integration-test -Dspring.data.mongodb.port=28018
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-    - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
     - bash <(curl -s https://codecov.io/bash)
