@@ -5,15 +5,12 @@ import java.util.List;
 
 public class Guess {
 
-	private List<Color> code = new ArrayList<>();
+    private List<Color> code = new ArrayList<>();
     private String gameKey;
 
-	public Guess() {
+    public List<Color> getCode() {
+        return code;
     }
-
-	public List<Color> getCode() {
-		return code;
-	}
 
     public void setCode(List<Color> code) {
         this.code = code;

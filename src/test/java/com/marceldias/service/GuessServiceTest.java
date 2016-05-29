@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GuessServiceTest {
@@ -72,6 +73,12 @@ public class GuessServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testGuessWithoutCode() {
+        guessService.processGuess(guess, game);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGuessWithEmptyCode() {
+        guess.setCode(Collections.EMPTY_LIST);
         guessService.processGuess(guess, game);
     }
 }

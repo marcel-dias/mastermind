@@ -42,6 +42,7 @@ public class GameServiceBean implements GameService {
         return gameRepository.findByKey(key);
     }
 
+    @Override
     public void clear() {
         gameRepository.deleteAll();
     }

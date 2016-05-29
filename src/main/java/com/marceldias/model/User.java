@@ -4,7 +4,9 @@ public class User {
 
     private String name;
 
-    public User() {}
+    public User() {
+        //The default constructor is used in json deserialization
+    }
 
     public User(String name) {
         this.name = name;
