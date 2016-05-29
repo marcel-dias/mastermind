@@ -18,4 +18,14 @@ public class ColorTest {
         Assert.assertThat(colors.size(), IsEqual.equalTo(8));
         Assert.assertThat(colors, IsEqual.equalTo(expected));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyCode() {
+        Color.toColorList("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullCode() {
+        Color.toColorList(null);
+    }
 }

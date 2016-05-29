@@ -62,4 +62,15 @@ public class GameTest {
         Assert.assertThat(game.getGuesses().size(), Is.is(0));
         Assert.assertThat(game.getResult(), IsNull.nullValue());
     }
+
+    @Test
+    public void testGuessResult() {
+        GuessResult result = new GuessResult();
+        result.setExact(8);
+        Game game = new Game(user);
+        game.setResult(result);
+
+        Assert.assertThat(game.getGuesses().size(), Is.is(1));
+        Assert.assertThat(game.getResult(), Is.is(result));
+    }
 }
