@@ -11,8 +11,9 @@ public class GuessServiceBean implements GuessService {
 
     @Override
     public GuessResult processGuess(Guess guess, Game game) {
-        if (guess.getCode() == null || guess.getCode().isEmpty()) {
-            throw new IllegalArgumentException("The code guessed is null or empty!");
+        if (guess.getCode() == null || guess.getCode().isEmpty() ||
+                guess.getCode().size() != game.getCodeLength()) {
+            throw new IllegalArgumentException("The code guessed is null, empty or with the wrong size!");
         }
         GuessResult result = new GuessResult();
         result.setGuess(guess.getCode());
