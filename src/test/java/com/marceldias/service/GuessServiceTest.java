@@ -81,4 +81,11 @@ public class GuessServiceTest {
         guess.setCode(Collections.EMPTY_LIST);
         guessService.processGuess(guess, game);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGuessWithWrongCodeLength() {
+        code = Arrays.asList(Color.B, Color.C, Color.R, Color.C, Color.G);
+        guess.setCode(code);
+        guessService.processGuess(guess, game);
+    }
 }
