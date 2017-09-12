@@ -1,10 +1,6 @@
 #!groovy
 pipeline {
     agent any
-    tools {
-        maven 'MVN'
-        jdk 'JDK8'
-    }
     environment {
         DEPLOY_FAILURE = false
         VERSION = readMavenPom().getVersion()
@@ -19,6 +15,10 @@ pipeline {
         }
         stage('Build') {
             steps {
+                tools {
+                    maven 'MVN'
+                    jdk 'JDK8'
+                }
                 echo "Running ${env.BUILD_ID} for EM"
 
                 sh "mvn clean install"
