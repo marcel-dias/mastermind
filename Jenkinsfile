@@ -1,9 +1,9 @@
 #!groovy
 pipeline {
     agent any
+    def mvnHome
+    def javaHome
     stages {
-        def mvnHome
-        def javaHome
         tools {
             maven 'MVN'
         }
