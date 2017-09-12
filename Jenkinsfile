@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "javaHome == ${javaHome}"
+                echo "javaHome == ${env.JAVA_HOME}"
 
                 sh "mvn clean install"
             }
