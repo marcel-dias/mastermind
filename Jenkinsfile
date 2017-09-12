@@ -7,6 +7,7 @@ pipeline {
     }
     environment {
         DEPLOY_FAILURE = false
+        VERSION = readMavenPom().getVersion()
     }
 
     stages {
@@ -27,8 +28,7 @@ pipeline {
         }
         stage('Get version') {
             steps {
-                pom = readMavenPom file: 'pom.xml'
-                echo "Project version ${pom.version}"
+                echo "Project version ${VERSION}"
             }
         }
         stage('Build Docker Images') {
