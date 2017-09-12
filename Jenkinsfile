@@ -18,12 +18,16 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running ${env.BUILD_ID} for EM"
 
                 sh "mvn clean install"
                 junit '**/target/surefire-reports/*.xml'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
+        }
+        stage('Get version') {
+            pom = readMavenPom file: 'pom.xml'
+            echo "Project version ${pom.version}"
         }
         stage('Build Docker Images') {
             steps {
