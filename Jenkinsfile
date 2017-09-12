@@ -5,27 +5,63 @@ pipeline {
         maven 'MVN'
         jdk 'JDK8'
     }
+    environment {
+        DEPLOY_FAILURE = false
+    }
 
     stages {
 
-        stage('Preparation') { // for display purposes
+        stage('Code Checkout') {
             steps {
-                // Get some code from a GitHub repository
                 git 'https://github.com/marceldiass/mastermind.git'
             }
         }
         stage('Build') {
             steps {
-                echo "javaHome == ${env.JAVA_HOME}"
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 
                 sh "mvn clean install"
+                junit '**/target/surefire-reports/*.xml'
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+        stage('Build Docker Images') {
+            steps {
+                echo "Building docker images..."
+            }
+        }
+        stage('Run SQL Updates') {
+            steps {
+                echo "Running SQL Updates..."
+            }
+        }
+        stage('Executing Blue/Green Deployment') {
+            steps {
+                echo "Read ENV Config..."
+                echo "Update Container Version..."
+                echo "Execute smoke tests..."
+                echo "Monitor application stats..."
+            }
+
+            post {
+                failure {
+                    echo 'Executing rollback'
+                    echo 'Notify failure'
+                }
             }
         }
         stage('Results') {
             steps {
-                junit '**/target/surefire-reports/*.xml'
-                archive 'target/*.jar'
+
             }
+        }
+    }
+    post {
+        failure {
+            echo 'The Pipeline failed :('
+        }
+        success {
+            echo 'Successfully deployed the version X of EM and CAS'
         }
     }
 }
