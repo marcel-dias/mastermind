@@ -14,11 +14,12 @@ pipeline {
             }
         }
         stage('Build') {
+            tools {
+                maven 'MVN'
+                jdk 'JDK8'
+            }
             steps {
-                tools {
-                    maven 'MVN'
-                    jdk 'JDK8'
-                }
+
                 echo "Running ${env.BUILD_ID} for EM"
 
                 sh "mvn clean install"
