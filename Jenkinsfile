@@ -26,8 +26,10 @@ pipeline {
             }
         }
         stage('Get version') {
-            pom = readMavenPom file: 'pom.xml'
-            echo "Project version ${pom.version}"
+            steps {
+                pom = readMavenPom file: 'pom.xml'
+                echo "Project version ${pom.version}"
+            }
         }
         stage('Build Docker Images') {
             steps {
