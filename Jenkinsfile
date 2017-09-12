@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "javaHome == ${javaHome}"
 
-                sh "'${mvnHome}/bin/mvn' clean install"
+                sh "mvn clean install"
             }
         }
         stage('Results') {
