@@ -52,7 +52,7 @@ pipeline {
         }
         stage('Results') {
             steps {
-
+                echo 'Publishing result'
             }
         }
     }
