@@ -33,8 +33,14 @@ pipeline {
             steps {
                 echo "Project version ${VERSION}"
                 echo "Building docker images..."
-                script {
-                    docker.build("marceldiass/mastermind-pipe:${VERSION}")
+                sh "mkdir -p test/target"
+                sh "cp Dockerfile test/"
+                sh "cp start.sh test/"
+                sh "cp target/mastermind.jar test/target/"
+                dir('test') {
+                    script {
+                        docker.build("marceldiass/mastermind-pipe:${VERSION}")
+                    }
                 }
 
             }
