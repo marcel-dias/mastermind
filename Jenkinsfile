@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             tools {
-                maven 'MVN'
+                maven 'mvn'
                 jdk 'JDK8'
             }
             steps {
