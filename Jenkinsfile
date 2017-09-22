@@ -33,7 +33,10 @@ pipeline {
             steps {
                 echo "Project version ${VERSION}"
                 echo "Building docker images..."
-                docker.build("marceldiass/mastermind-pipe:${VERSION}")
+                script {
+                    docker.build("marceldiass/mastermind-pipe:${VERSION}")
+                }
+
             }
         }
         stage('Run SQL Updates') {
