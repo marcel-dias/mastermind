@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Build Docker Images') {
             environment {
-                VERSION = readMavenPom().getVersion()
+                VERSION = readMavenPom().getVersion().toLowerCase()
             }
             steps {
                 echo "Project version ${VERSION}"
