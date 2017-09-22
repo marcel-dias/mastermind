@@ -3,7 +3,6 @@ pipeline {
     agent any
     environment {
         DEPLOY_FAILURE = false
-        VERSION = readMavenPom().getVersion()
     }
 
     stages {
@@ -28,6 +27,9 @@ pipeline {
             }
         }
         stage('Get version') {
+            environment {
+                VERSION = readMavenPom().getVersion()
+            }
             steps {
                 echo "Project version ${VERSION}"
             }
