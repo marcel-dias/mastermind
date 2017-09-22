@@ -26,17 +26,14 @@ pipeline {
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
-        stage('Get version') {
+        stage('Build Docker Images') {
             environment {
                 VERSION = readMavenPom().getVersion()
             }
             steps {
                 echo "Project version ${VERSION}"
-            }
-        }
-        stage('Build Docker Images') {
-            steps {
                 echo "Building docker images..."
+                sh "docker build -t marceldiass/mastermind-pipe:${VERSION} ."
             }
         }
         stage('Run SQL Updates') {
